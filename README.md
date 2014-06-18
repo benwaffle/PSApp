@@ -1,4 +1,4 @@
-PSApp
+PSApp[![Build Status](https://travis-ci.org/benwaffle/PSApp.svg?branch=master)](https://travis-ci.org/benwaffle/PSApp)
 =====
 
 A tool for students. Original idea: [GradeTool](https://github.com/benwaffle/GradeTool).
