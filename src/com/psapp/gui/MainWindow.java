@@ -4,7 +4,6 @@ import java.awt.Dimension;
 
 import javafx.application.*;
 import javafx.scene.*;
-import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
 /**
