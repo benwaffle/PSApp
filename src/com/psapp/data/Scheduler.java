@@ -9,5 +9,5 @@ public final class Scheduler {
 	 */
 	private static Session session;
 	
-	
+	private Scheduler() {}
 }

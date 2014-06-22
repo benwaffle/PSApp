@@ -1,7 +1,56 @@
 <?xml version="1.0"?>
 <!-- I would use maven but too many directories :(. I guess I'll have to deal with XML -->
-<project name="PSApp" default="build" basedir=".">
-	<target name="build">
-		<javac srcdir="src" destdir="build" debug="true" includes="**/*.java"/>
+<project name="PSApp" basedir=".">
+	<description>PSApp build file</description>
+	<!-- global properties -->
+	<property name="src" location="src"/>
+	<property name="bin" location="bin"/>
+	<property name="jarfile" location="PSApp.jar"/>
+	<property name="javadoc" location="javadoc"/>
+	<property name="java" value="1.8"/> <!-- version of Java -->
+
+	<path id="master-classpath">
+		<fileset dir="${bin}"></fileset>
+	</path>
+
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${javadoc}"/>
 	</target>
-</project>	
+	
+	<target name="compile" depends="init"
+		description="Compile PSApp from source">
+		<javac srcdir="${src}" destdir="${bin}" source="${java}" debug="on">
+			<classpath refid="master-classpath"/>
+		</javac>
+	</target>
+
+	<target name="build" depends="compile" description="Jar PSApp">
+		<jar jarfile="${jarfile}" basedir="${bin}">
+			<fileset dir="." includes="LICENSE"/>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Main-Class" 
+					value="com.psapp.PSApp"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="test" depends="build" description="Test-build PSApp">
+	</target>
+
+	<target name="javadoc" description="Documentation for PSApp">
+		<javadoc sourcepath="${src}" destdir="${javadoc}" author="true" 
+			version="true" windowtitle="PSApp">
+			<classpath refid="master-classpath"/>
+			<link href="http://docs.oracle.com/javase/8/docs/api/"/>
+		</javadoc>
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete file="${jarfile}"/>
+		<delete dir="${bin}"/>
+		<delete dir="${javadoc}"/>
+	</target>
+</project>

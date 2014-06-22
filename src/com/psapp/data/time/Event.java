@@ -1,5 +1,7 @@
 package com.psapp.data.time;
 
+import java.util.*;
+
 /**
  * An Event is a record of something taking place in time, whether this be
  * an objective or appointment.
@@ -7,6 +9,7 @@ package com.psapp.data.time;
 public abstract class Event {
 	private String title, description;
 	private boolean completed = false;
+	private Calendar date;
 	
 	/**
 	 * Creates a new event.
@@ -16,6 +19,7 @@ public abstract class Event {
 	public Event(String title, String description) {
 		this.title = title;
 		this.description = description;
+		date = Calendar.getInstance(); // TODO: relevant timezone checking
 	}
 	
 	/**
@@ -32,4 +36,15 @@ public abstract class Event {
 	 * Has this event been completed or not?
 	 */
 	public boolean done() { return completed; }
+	
+	/**
+	 * Gets the date-time of the event.
+	 */
+	public Date getDateTime() { return date.getTime(); }
+	
+	/**
+	 * Update completion status.
+	 * @param b A status: (true = complete, false = incomplete)
+	 */
+	public void complete(boolean b) { completed = b; }
 }
